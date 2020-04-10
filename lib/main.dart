@@ -1,5 +1,5 @@
 import 'package:easyjob/DI/DIContainer.dart';
-import 'package:easyjob/ui/offers_list.dart';
+import 'package:easyjob/ui/offer_list/offers_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,6 +1,8 @@
 import 'package:easyjob/bloc/offers_list_bloc/bloc.dart';
+import 'package:easyjob/bloc/search_bar_bloc/bloc.dart';
+import 'package:easyjob/bloc/search_bar_bloc/search_bar_bloc.dart';
 import 'package:easyjob/model/just_join_it/model.dart';
-import 'package:easyjob/ui/widgets/searchTextField.dart';
+import 'package:easyjob/ui/search_bar/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
@@ -21,23 +23,31 @@ class _OffersListState extends State<OffersList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => _bloc,
-      child: _build(),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: BlocProvider(
+        create: (context) => _bloc,
+        child: _build(),
+      ),
     );
   }
 
   Widget _build() {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("EasyJob"),
-        ),
-        body: Container(
-            child: Column(
+      appBar: AppBar(
+        title: Text("EasyJob"),
+      ),
+      body: Container(
+        child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-              child: SearchTextField(),
+            Flexible(
+              child: SearchBar(),
             ),
             Flexible(
               child: BlocBuilder(
@@ -60,17 +70,20 @@ class _OffersListState extends State<OffersList> {
               ),
             ),
           ],
-        )));
+        ),
+      ),
+    );
   }
 
   Widget _buildResultList(OffersListState state) {
     return NotificationListener<ScrollNotification>(
       child: ListView.builder(
-          itemCount: state.offers.length,
-          controller: _scrollController,
-          itemBuilder: (context, index) {
-            return _buildCell(state.offers[index]);
-          }),
+        itemCount: state.offers.length,
+        controller: _scrollController,
+        itemBuilder: (context, index) {
+          return _buildCell(state.offers[index]);
+        },
+      ),
     );
   }
 
@@ -84,7 +97,7 @@ class _OffersListState extends State<OffersList> {
             Image.network(
               offer.company_logo_url,
               fit: BoxFit.contain,
-              height: 30,
+              height: 40,
               width: 80,
             ),
             SizedBox(

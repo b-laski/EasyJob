@@ -1,9 +1,19 @@
+import 'package:built_value/built_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easyjob/bloc/offers_list_bloc/bloc.dart';
 
 class SearchTextField extends StatefulWidget {
-  SearchTextField({Key key}) : super(key: key);
+  SearchTextField(
+      {Key key, this.hintText, this.icon, this.onChange, this.onTap})
+      : super(key: key);
+
+  final String hintText;
+  final IconData icon;
+
+  @nullable
+  final Function(String) onChange;
+  final Function() onTap;
 
   @override
   _SearchTextFieldState createState() => _SearchTextFieldState();
@@ -26,22 +36,31 @@ class _SearchTextFieldState extends State<SearchTextField> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+    _focusNode.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return Flexible(
       child: TextField(
         controller: _controller,
         focusNode: _focusNode,
-        onSubmitted: (searchQuary) {
-          print(searchQuary);
-          BlocProvider.of<OffersListBloc>(context).searchJob(searchQuary);
+        onTap: widget.onTap,
+        onChanged: widget.onChange,
+        onSubmitted: (searchedQuary) {
+          BlocProvider.of<OffersListBloc>(context).searchJob();
         },
         decoration: InputDecoration(
-            hintText: "Search job...",
-            border: InputBorder.none,
-            icon: Icon(
-              Icons.search,
-              color: Colors.black.withOpacity(0.5),
-            )),
+          hintText: widget.hintText,
+          border: InputBorder.none,
+          icon: Icon(
+            widget.icon,
+            color: Colors.black.withOpacity(0.5),
+          ),
+        ),
       ),
     );
   }

@@ -42,7 +42,7 @@ class _$OffersSerializer implements StructuredSerializer<Offers> {
           result.offers.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Offer)]))
-              as BuiltList<dynamic>);
+              as BuiltList<Object>);
           break;
       }
     }

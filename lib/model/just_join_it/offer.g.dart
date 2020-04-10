@@ -17,61 +17,71 @@ class _$OfferSerializer implements StructuredSerializer<Offer> {
   @override
   Iterable<Object> serialize(Serializers serializers, Offer object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'title',
-      serializers.serialize(object.title,
-          specifiedType: const FullType(String)),
-      'street',
-      serializers.serialize(object.street,
-          specifiedType: const FullType(String)),
-      'city',
-      serializers.serialize(object.city, specifiedType: const FullType(String)),
-      'country_code',
-      serializers.serialize(object.country_code,
-          specifiedType: const FullType(String)),
-      'address_text',
-      serializers.serialize(object.address_text,
-          specifiedType: const FullType(String)),
-      'marker_icon',
-      serializers.serialize(object.marker_icon,
-          specifiedType: const FullType(String)),
-      'remote',
-      serializers.serialize(object.remote, specifiedType: const FullType(bool)),
-      'company_name',
-      serializers.serialize(object.company_name,
-          specifiedType: const FullType(String)),
-      'company_size',
-      serializers.serialize(object.company_size,
-          specifiedType: const FullType(String)),
-      'experience_level',
-      serializers.serialize(object.experience_level,
-          specifiedType: const FullType(String)),
-      'latitude',
-      serializers.serialize(object.latitude,
-          specifiedType: const FullType(String)),
-      'longitude',
-      serializers.serialize(object.longitude,
-          specifiedType: const FullType(String)),
-      'employment_type',
-      serializers.serialize(object.employment_type,
-          specifiedType: const FullType(String)),
-      'published_at',
-      serializers.serialize(object.published_at,
-          specifiedType: const FullType(String)),
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(String)),
-      'company_logo_url',
-      serializers.serialize(object.company_logo_url,
-          specifiedType: const FullType(String)),
-      'skills',
-      serializers.serialize(object.skills,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(Skill)])),
-    ];
+    final result = <Object>[];
+    if (object.title != null) {
+      result
+        ..add('title')
+        ..add(serializers.serialize(object.title,
+            specifiedType: const FullType(String)));
+    }
+    if (object.street != null) {
+      result
+        ..add('street')
+        ..add(serializers.serialize(object.street,
+            specifiedType: const FullType(String)));
+    }
+    if (object.city != null) {
+      result
+        ..add('city')
+        ..add(serializers.serialize(object.city,
+            specifiedType: const FullType(String)));
+    }
+    if (object.country_code != null) {
+      result
+        ..add('country_code')
+        ..add(serializers.serialize(object.country_code,
+            specifiedType: const FullType(String)));
+    }
+    if (object.address_text != null) {
+      result
+        ..add('address_text')
+        ..add(serializers.serialize(object.address_text,
+            specifiedType: const FullType(String)));
+    }
+    if (object.marker_icon != null) {
+      result
+        ..add('marker_icon')
+        ..add(serializers.serialize(object.marker_icon,
+            specifiedType: const FullType(String)));
+    }
+    if (object.remote != null) {
+      result
+        ..add('remote')
+        ..add(serializers.serialize(object.remote,
+            specifiedType: const FullType(bool)));
+    }
+    if (object.company_name != null) {
+      result
+        ..add('company_name')
+        ..add(serializers.serialize(object.company_name,
+            specifiedType: const FullType(String)));
+    }
     if (object.company_url != null) {
       result
         ..add('company_url')
         ..add(serializers.serialize(object.company_url,
+            specifiedType: const FullType(String)));
+    }
+    if (object.company_size != null) {
+      result
+        ..add('company_size')
+        ..add(serializers.serialize(object.company_size,
+            specifiedType: const FullType(String)));
+    }
+    if (object.experience_level != null) {
+      result
+        ..add('experience_level')
+        ..add(serializers.serialize(object.experience_level,
             specifiedType: const FullType(String)));
     }
     if (object.salary_from != null) {
@@ -91,6 +101,49 @@ class _$OfferSerializer implements StructuredSerializer<Offer> {
         ..add('salary_currency')
         ..add(serializers.serialize(object.salary_currency,
             specifiedType: const FullType(String)));
+    }
+    if (object.latitude != null) {
+      result
+        ..add('latitude')
+        ..add(serializers.serialize(object.latitude,
+            specifiedType: const FullType(String)));
+    }
+    if (object.longitude != null) {
+      result
+        ..add('longitude')
+        ..add(serializers.serialize(object.longitude,
+            specifiedType: const FullType(String)));
+    }
+    if (object.employment_type != null) {
+      result
+        ..add('employment_type')
+        ..add(serializers.serialize(object.employment_type,
+            specifiedType: const FullType(String)));
+    }
+    if (object.published_at != null) {
+      result
+        ..add('published_at')
+        ..add(serializers.serialize(object.published_at,
+            specifiedType: const FullType(String)));
+    }
+    if (object.id != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(String)));
+    }
+    if (object.company_logo_url != null) {
+      result
+        ..add('company_logo_url')
+        ..add(serializers.serialize(object.company_logo_url,
+            specifiedType: const FullType(String)));
+    }
+    if (object.skills != null) {
+      result
+        ..add('skills')
+        ..add(serializers.serialize(object.skills,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Skill)])));
     }
     return result;
   }
@@ -190,7 +243,7 @@ class _$OfferSerializer implements StructuredSerializer<Offer> {
           result.skills.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Skill)]))
-              as BuiltList<dynamic>);
+              as BuiltList<Object>);
           break;
       }
     }
@@ -268,59 +321,7 @@ class _$Offer extends Offer {
       this.id,
       this.company_logo_url,
       this.skills})
-      : super._() {
-    if (title == null) {
-      throw new BuiltValueNullFieldError('Offer', 'title');
-    }
-    if (street == null) {
-      throw new BuiltValueNullFieldError('Offer', 'street');
-    }
-    if (city == null) {
-      throw new BuiltValueNullFieldError('Offer', 'city');
-    }
-    if (country_code == null) {
-      throw new BuiltValueNullFieldError('Offer', 'country_code');
-    }
-    if (address_text == null) {
-      throw new BuiltValueNullFieldError('Offer', 'address_text');
-    }
-    if (marker_icon == null) {
-      throw new BuiltValueNullFieldError('Offer', 'marker_icon');
-    }
-    if (remote == null) {
-      throw new BuiltValueNullFieldError('Offer', 'remote');
-    }
-    if (company_name == null) {
-      throw new BuiltValueNullFieldError('Offer', 'company_name');
-    }
-    if (company_size == null) {
-      throw new BuiltValueNullFieldError('Offer', 'company_size');
-    }
-    if (experience_level == null) {
-      throw new BuiltValueNullFieldError('Offer', 'experience_level');
-    }
-    if (latitude == null) {
-      throw new BuiltValueNullFieldError('Offer', 'latitude');
-    }
-    if (longitude == null) {
-      throw new BuiltValueNullFieldError('Offer', 'longitude');
-    }
-    if (employment_type == null) {
-      throw new BuiltValueNullFieldError('Offer', 'employment_type');
-    }
-    if (published_at == null) {
-      throw new BuiltValueNullFieldError('Offer', 'published_at');
-    }
-    if (id == null) {
-      throw new BuiltValueNullFieldError('Offer', 'id');
-    }
-    if (company_logo_url == null) {
-      throw new BuiltValueNullFieldError('Offer', 'company_logo_url');
-    }
-    if (skills == null) {
-      throw new BuiltValueNullFieldError('Offer', 'skills');
-    }
-  }
+      : super._();
 
   @override
   Offer rebuild(void Function(OfferBuilder) updates) =>
@@ -586,12 +587,12 @@ class OfferBuilder implements Builder<Offer, OfferBuilder> {
               published_at: published_at,
               id: id,
               company_logo_url: company_logo_url,
-              skills: skills.build());
+              skills: _skills?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'skills';
-        skills.build();
+        _skills?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Offer', _$failedField, e.toString());
